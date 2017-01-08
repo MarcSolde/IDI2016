@@ -1,11 +1,9 @@
-package com.example.pr_idi.mydatabaseexample;
+package com.example.sejo.navdra;
 
 /**
  * FilmData
  * Created by pr_idi on 10/11/16.
  */
-import java.util.ArrayList;
-import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,6 +11,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FilmData {
 
@@ -61,6 +62,7 @@ public class FilmData {
         // (you can use this as a query example)
         // to feed the view.
 
+
         Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
                 allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
@@ -85,7 +87,7 @@ public class FilmData {
         List<Film> comments = new ArrayList<>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
-                allColumns, null, null, null, null, null);
+                allColumns, null, null, null, null, MySQLiteHelper.COLUMN_TITLE+" DESC");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -95,6 +97,7 @@ public class FilmData {
         }
         // make sure to close the cursor
         cursor.close();
+
         return comments;
     }
 
