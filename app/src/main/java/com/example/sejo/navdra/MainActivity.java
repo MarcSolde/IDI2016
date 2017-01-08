@@ -1,9 +1,7 @@
 package com.example.sejo.navdra;
 
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.ListViewCompat;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,7 +28,6 @@ public class MainActivity extends AppCompatActivity
 
     private FilmData filmData;
     private ListView listView;
-    private List listaMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,12 +97,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        boolean fragmentTransaction = false;
+        Fragment fragment = null;
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_search) {
+            fragment = new Searcher();
+            fragmentTransaction = true;
         } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_myfilms) {
+            fragment = null;
+            fragmentTransaction = false;
 
         } else if (id == R.id.nav_manage) {
 
@@ -114,6 +116,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }*/
+
+        if(fragmentTransaction) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_main, fragment)
+                    .commit();
+
+            getSupportActionBar().setTitle(item.getTitle());
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -132,13 +142,17 @@ public class MainActivity extends AppCompatActivity
                 int nextInt = new Random().nextInt(4);
                 // save the new film to the database
                 film = filmData.createFilm(newFilm[nextInt*2], newFilm[nextInt*2 + 1]);
-                adapter.add(film);
+                //adapter.add(film);
+                adapter.clear();
+                adapter.addAll(filmData.getAllFilms());
                 break;
             case R.id.deleteb:
                 if (listView.getCount() > 0) {
                     film = (Film) listView.getItemAtPosition(0);
                     filmData.deleteFilm(film);
                     adapter.remove(film);
+                    adapter.clear();
+                    adapter.addAll(filmData.getAllFilms());
                 }
                 break;
         }
