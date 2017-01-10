@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_search) {
             intent = new Intent(this, SearcherActivity.class);
 
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_addmovie) {
+            intent = new Intent(this, AddMovie.class);
 
         } else if (id == R.id.nav_myfilms) {
             //fragment = null;
@@ -140,8 +141,9 @@ public class MainActivity extends AppCompatActivity
                 String[] newFilm = new String[] { "Blade Runner", "Ridley Scott", "Rocky Horror Picture Show", "Jim Sharman", "The Godfather", "Francis Ford Coppola", "Toy Story", "John Lasseter" };
                 int nextInt = new Random().nextInt(4);
                 // save the new film to the database
-                film = filmData.createFilm(newFilm[nextInt*2], newFilm[nextInt*2 + 1]);
-                //adapter.add(film);
+                //String titol, String pais, String any, String dir, String prot, String punts
+                film = filmData.createFilm(newFilm[nextInt*2], "test", "2014", newFilm[nextInt*2 + 1],"test", "10");
+                adapter.add(film);
                 adapter.clear();
                 adapter.addAll(filmData.getAllFilms());
                 break;

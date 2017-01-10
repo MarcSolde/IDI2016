@@ -10,9 +10,10 @@ import android.widget.Toast;
 
 public class AddMovie extends AppCompatActivity {
 
-    Button ok;
+    private Button ok;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("pene");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
         ok = (Button)findViewById(R.id.Boto);
@@ -34,8 +35,11 @@ public class AddMovie extends AppCompatActivity {
         director = ((EditText) findViewById(R.id.tEdit)).getText().toString();
         prot = ((EditText) findViewById(R.id.tEdit)).getText().toString();
         nota = ((EditText) findViewById(R.id.tEdit)).getText().toString();
-        MySQLiteHelper db = new MySQLiteHelper(AddMovie.this);
-        db.insert(titol, pais, any, director, prot, nota);
+        //MySQLiteHelper db = new MySQLiteHelper(AddMovie.this);
+        //db.insert(titol, pais, any, director, prot, nota);
+        FilmData fd = new FilmData(AddMovie.this);
+        fd.createFilm(titol, pais, any, director, prot, nota);
         Toast.makeText(AddMovie.this, "Pelicula Guardada", Toast.LENGTH_SHORT).show();
     }
+
 }

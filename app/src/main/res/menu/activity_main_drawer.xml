@@ -11,9 +11,9 @@
             android:icon="@drawable/ic_menu_search"
             android:title="Search" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_addmovie"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Add Movie" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
