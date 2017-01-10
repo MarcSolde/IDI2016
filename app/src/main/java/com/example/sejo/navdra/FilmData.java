@@ -37,10 +37,10 @@ public class FilmData {
         dbHelper.close();
     }
 
-    public Film createFilm(String title, String pais, String any, String director, String prot, String punts) {
+    public Film createFilm(String title, String pais, String bany, String director, String prot, String punts) {
         ContentValues values = new ContentValues();
         Log.d("Creating", "Creating " + title + " " + director);
-
+        System.out.println("AAAA");
         // Add data: Note that this method only provides title and director
         // Must modify the method to add the full data
         values.put(MySQLiteHelper.COLUMN_TITLE, title);
@@ -48,9 +48,9 @@ public class FilmData {
 
         // Invented data
         values.put(MySQLiteHelper.COLUMN_COUNTRY, pais);
-        values.put(MySQLiteHelper.COLUMN_YEAR_RELEASE, any);
+        values.put(MySQLiteHelper.COLUMN_YEAR_RELEASE, Integer.parseInt(bany));
         values.put(MySQLiteHelper.COLUMN_PROTAGONIST, prot);
-        values.put(MySQLiteHelper.COLUMN_CRITICS_RATE, punts);
+        values.put(MySQLiteHelper.COLUMN_CRITICS_RATE, Integer.parseInt(punts));
 
         // Actual insertion of the data using the values variable
         long insertId = database.insert(MySQLiteHelper.TABLE_FILMS, null,

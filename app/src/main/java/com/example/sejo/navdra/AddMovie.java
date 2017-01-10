@@ -30,15 +30,16 @@ public class AddMovie extends AppCompatActivity {
     public void AddMovies(View view) {
         String titol, pais, any, director, prot, nota;
         titol = ((EditText) findViewById(R.id.tEdit)).getText().toString();
-        pais = ((EditText) findViewById(R.id.tEdit)).getText().toString();
-        any = ((EditText) findViewById(R.id.tEdit)).getText().toString();
-        director = ((EditText) findViewById(R.id.tEdit)).getText().toString();
-        prot = ((EditText) findViewById(R.id.tEdit)).getText().toString();
-        nota = ((EditText) findViewById(R.id.tEdit)).getText().toString();
+        pais = ((EditText) findViewById(R.id.pEdit)).getText().toString();
+        any = ((EditText) findViewById(R.id.aEdit)).getText().toString();
+        director = ((EditText) findViewById(R.id.dEdit)).getText().toString();
+        prot = ((EditText) findViewById(R.id.PrEdit)).getText().toString();
+        nota = ((EditText) findViewById(R.id.nEdit)).getText().toString();
         //MySQLiteHelper db = new MySQLiteHelper(AddMovie.this);
         //db.insert(titol, pais, any, director, prot, nota);
         FilmData fd = new FilmData(AddMovie.this);
-        fd.createFilm(titol, pais, any, director, prot, nota);
+        fd.open();
+        Film f = fd.createFilm(titol, pais, any, director, prot, nota);
         Toast.makeText(AddMovie.this, "Pelicula Guardada", Toast.LENGTH_SHORT).show();
     }
 
