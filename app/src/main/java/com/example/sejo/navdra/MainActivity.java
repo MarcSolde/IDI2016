@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_addmovie) {
             intent = new Intent(this, AddMovie.class);
 
+
+
         } else if (id == R.id.nav_myfilms) {
             //fragment = null;
             //fragmentTransaction = false;
@@ -163,6 +165,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         filmData.open();
+        ArrayAdapter<Film> adapter = (ArrayAdapter<Film>) listView.getAdapter();
+        adapter.clear();
+        adapter.addAll(filmData.getAllFilms());
         super.onResume();
     }
 
