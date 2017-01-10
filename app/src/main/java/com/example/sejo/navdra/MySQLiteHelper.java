@@ -4,10 +4,12 @@ package com.example.sejo.navdra;
  * MySQLiteHelper
  * Created by pr_idi on 10/11/16.
  */
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
@@ -51,5 +53,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FILMS);
         onCreate(db);
     }
+
+    public void insert(String titol, String pais, String any, String dir, String prot, String punts)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_TITLE, titol);
+        cv.put(COLUMN_COUNTRY, pais);
+        cv.put(COLUMN_YEAR_RELEASE, any);
+        cv.put(COLUMN_DIRECTOR, dir);
+        cv.put(COLUMN_PROTAGONIST, prot);
+        cv.put(COLUMN_CRITICS_RATE, punts);
+        long ret = db.insert(TABLE_FILMS, null, cv);
+        db.close();
+    }
+
 
 }
