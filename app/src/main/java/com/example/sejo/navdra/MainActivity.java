@@ -1,6 +1,8 @@
 package com.example.sejo.navdra;
 
-import android.support.v4.app.Fragment;
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -14,11 +16,13 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+
 import java.util.Comparator;
 import java.util.Random;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Executors;
 
 import android.os.Bundle;
 
@@ -97,17 +101,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        boolean fragmentTransaction = false;
-        Fragment fragment = null;
+        Intent intent = null;
+
 
         if (id == R.id.nav_search) {
-            fragment = new Searcher();
-            fragmentTransaction = true;
+            intent = new Intent(this, SearcherActivity.class);
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_myfilms) {
-            fragment = null;
-            fragmentTransaction = false;
+            //fragment = null;
+            //fragmentTransaction = false;
 
         } else if (id == R.id.nav_manage) {
 
@@ -117,18 +121,13 @@ public class MainActivity extends AppCompatActivity
 
         }*/
 
-        if(fragmentTransaction) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_main, fragment)
-                    .commit();
-
-            getSupportActionBar().setTitle(item.getTitle());
-        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        startActivity(intent);
         return true;
     }
+
 
     // Will be called via the onClick attribute
     // of the buttons in main.xml
