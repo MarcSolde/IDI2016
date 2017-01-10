@@ -136,6 +136,12 @@
             android:textSize="30dp"
             android:paddingTop="20dp"/>
     </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/delete"
+        android:text="Esborrar"
+        />
 
 
 

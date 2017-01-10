@@ -68,7 +68,16 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(MainActivity.this, vistaPeli.class);
-                intent.putExtra()
+                Film f = (Film) listView.getItemAtPosition(position);
+                System.out.println("hol");
+                System.out.println(f.getYear());
+                intent.putExtra("titol", f.getTitle());
+                intent.putExtra("any", f.getYear());
+                intent.putExtra("pais", f.getCountry());
+                intent.putExtra("director", f.getDirector());
+                intent.putExtra("nota", f.getCritics_rate());
+                intent.putExtra("prota", f.getProtagonist());
+                intent.putExtra("id", f.getId());
                 startActivity(intent);
             }
         });
