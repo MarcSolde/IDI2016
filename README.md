@@ -6,3 +6,4 @@ TODO:
   - [ ] Fer el Help
   - [ ] Fer el about
   - [x] Ordenar per any
+  - [ ] Limpiar xivatos
