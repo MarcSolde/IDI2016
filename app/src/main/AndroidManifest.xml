@@ -21,7 +21,8 @@
         <activity android:name=".SearcherActivity" />
         <activity android:name=".AddMovie" />
         <activity android:name=".vistaPeli" />
-        <activity android:name=".About"></activity>
+        <activity android:name=".About" />
+        <activity android:name=".Help"></activity>
     </application>
 
 </manifest>
