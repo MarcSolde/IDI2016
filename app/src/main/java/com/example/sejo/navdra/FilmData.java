@@ -8,6 +8,7 @@ package com.example.sejo.navdra;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -23,7 +24,12 @@ public class FilmData {
 
     // Here we only select Title and Director, must select the appropriate columns
     private String[] allColumns = { MySQLiteHelper.COLUMN_ID,
-            MySQLiteHelper.COLUMN_TITLE, MySQLiteHelper.COLUMN_DIRECTOR};
+            MySQLiteHelper.COLUMN_TITLE,
+            MySQLiteHelper.COLUMN_DIRECTOR,
+            MySQLiteHelper.COLUMN_COUNTRY,
+            MySQLiteHelper.COLUMN_YEAR_RELEASE,
+            MySQLiteHelper.COLUMN_PROTAGONIST,
+            MySQLiteHelper.COLUMN_CRITICS_RATE};
 
     public FilmData(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -44,11 +50,10 @@ public class FilmData {
         // Add data: Note that this method only provides title and director
         // Must modify the method to add the full data
         values.put(MySQLiteHelper.COLUMN_TITLE, title);
-        values.put(MySQLiteHelper.COLUMN_DIRECTOR, director);
-
-        // Invented data
         values.put(MySQLiteHelper.COLUMN_COUNTRY, pais);
         values.put(MySQLiteHelper.COLUMN_YEAR_RELEASE, Integer.parseInt(bany));
+        values.put(MySQLiteHelper.COLUMN_DIRECTOR, director);
+        // Invented dat
         values.put(MySQLiteHelper.COLUMN_PROTAGONIST, prot);
         values.put(MySQLiteHelper.COLUMN_CRITICS_RATE, Integer.parseInt(punts));
 
@@ -66,7 +71,9 @@ public class FilmData {
         Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
                 allColumns, MySQLiteHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
+
         cursor.moveToFirst();
+        Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(cursor));
         Film newFilm = cursorToFilm(cursor);
 
         // Do not forget to close the cursor
@@ -101,13 +108,14 @@ public class FilmData {
         return comments;
     }
 
+
     public List<Film> FindFilms(String s) {
         List<Film> comments = new ArrayList<>();
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
                 allColumns,
-                MySQLiteHelper.COLUMN_TITLE+" LIKE *"+s+"* OR "
-                        +MySQLiteHelper.COLUMN_PROTAGONIST+" LIKE *"+s+"*",
+                MySQLiteHelper.COLUMN_TITLE + " LIKE *" + s + "* OR "
+                        + MySQLiteHelper.COLUMN_PROTAGONIST + " LIKE *" + s + "*",
                 null,
                 null,
                 null,
@@ -120,9 +128,54 @@ public class FilmData {
             comments.add(comment);
             cursor.moveToNext();
         }
+        // make sure to close the cursor
+        cursor.close();
 
         return comments;
     }
+
+
+    public List<Film> gettAllFilmsYear()
+    {
+        List<Film> comments = new ArrayList<>();
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
+                allColumns, null, null, null, null, MySQLiteHelper.COLUMN_YEAR_RELEASE+" ASC");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Film comment = cursorToFilm(cursor);
+            comments.add(comment);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+
+        return comments;
+    }
+
+    public Film getFilm(String peli, String dire)
+    {
+        //Asumimos que nunca puede haver 2 peliculas con elmismo nombre y director
+        System.out.println("TEST");
+        Cursor c = database.query(MySQLiteHelper.TABLE_FILMS,
+                allColumns,MySQLiteHelper.COLUMN_TITLE+" = '"+peli+"' AND "+MySQLiteHelper.COLUMN_DIRECTOR+" = '"+dire+"'", null, null, null, null);
+        c.moveToFirst();
+        Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(c));
+        Film f = new Film();
+        f.setId(c.getLong(0));
+        f.setTitle(c.getString(1));
+        f.setDirector(c.getString(2));
+        f.setCountry(c.getString(3));
+        f.setCritics_rate(c.getInt(6));
+        f.setProtagonist(c.getString(5));
+        f.setYear(c.getInt(4));
+        System.out.println(f.getTitle());
+        System.out.println(f.getCountry());
+        c.close();
+        return f;
+    }
+
 
     private Film cursorToFilm(Cursor cursor) {
         Film film = new Film();
