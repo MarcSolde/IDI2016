@@ -5,17 +5,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class vistaPeli extends AppCompatActivity {
     private Film f;
     private Button b;
+    private RatingBar ratingBar;
+    private Integer NumStars = 5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vista_peli);
-        FilmData fd = new FilmData(vistaPeli.this);
+        final FilmData fd = new FilmData(vistaPeli.this);
         fd.open();
         Intent myIntent = getIntent();
         f = fd.getFilm(myIntent.getStringExtra("title"), myIntent.getStringExtra("dire"));
@@ -27,8 +31,14 @@ public class vistaPeli extends AppCompatActivity {
         aux.setText(Integer.toString(f.getYear()));
         ((TextView)findViewById(R.id.Director)).setText(f.getDirector());
         ((TextView)findViewById(R.id.Protagonista)).setText(f.getProtagonist());
-        ((TextView)findViewById(R.id.Nota)).setText(Integer.toString(f.getCritics_rate()));
+        Integer rate = f.getCritics_rate();
+        final TextView nota_num = (TextView)findViewById(R.id.nota_num);
+        nota_num.setText(Integer.toString(rate));
         fd.close();
+        ratingBar = (RatingBar) findViewById(R.id.nota);
+        ratingBar.setNumStars(NumStars);
+        ratingBar.setRating(rate*NumStars/10);
+
         b = (Button)findViewById(R.id.Boto);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +55,19 @@ public class vistaPeli extends AppCompatActivity {
                 return true;
             }
         });
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener(){
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                Integer rate = (int) rating*10/NumStars;
+                fd.open();
+                fd.setCriticsOnFilm(f, rate);
+                nota_num.setText(String.valueOf(rate));
+                fd.close();
+        }});
     }
+
 
     public void Esborrar(View view) {
         FilmData fd = new FilmData(vistaPeli.this);

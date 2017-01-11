@@ -29,6 +29,7 @@
             android:hint="Títol"
             android:inputType="none"
             android:textSize="25dp"
+            android:textAlignment="textEnd"
             />
     </RelativeLayout>
     <RelativeLayout
@@ -50,7 +51,8 @@
             android:hint="Pais"
             android:inputType="none"
             android:textSize="25dp"
-            android:paddingTop="20dp"/>
+            android:paddingTop="20dp"
+            android:textAlignment="textEnd"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -71,7 +73,8 @@
             android:hint="Any"
             android:inputType="none"
             android:textSize="25dp"
-            android:paddingTop="20dp"/>
+            android:paddingTop="20dp"
+            android:textAlignment="textEnd"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -92,7 +95,8 @@
             android:hint="Director"
             android:inputType="none"
             android:textSize="25dp"
-            android:paddingTop="20dp"/>
+            android:paddingTop="20dp"
+            android:textAlignment="textEnd"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -113,34 +117,56 @@
             android:hint="Protagonista"
             android:inputType="none"
             android:textSize="25dp"
-            android:paddingTop="20dp"/>
+            android:paddingTop="20dp"
+            android:textAlignment="textEnd"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/nota"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:paddingTop="20dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nota de la Crítica"
-            android:paddingTop="20dp"/>
-        <TextView
-            android:id="@+id/Nota"
+            android:text="Nota de la Crítica" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="18dp">
+
+            <RatingBar
+                android:id="@+id/nota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:numStars="5"/>
+
+            <TextView
+                android:text="Nota"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/nota_num"
+                android:layout_weight="5"
+                android:textSize="25dp"
+                android:textAlignment="textEnd"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:hint="Nota"
-            android:textSize="25dp"
-            android:inputType="none"
-            android:paddingTop="20dp"/>
+            android:text="Esborrar"
+            android:id="@+id/Boto"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Esborrar"
-        android:id="@+id/Boto"/>
 
 
 

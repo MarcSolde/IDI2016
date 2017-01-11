@@ -184,4 +184,12 @@ public class FilmData {
         film.setDirector(cursor.getString(2));
         return film;
     }
+
+    public void setCriticsOnFilm(Film f, Integer rate) {
+        String strSQL = "UPDATE "+ MySQLiteHelper.TABLE_FILMS +" SET "+MySQLiteHelper.COLUMN_CRITICS_RATE +
+                "= "+rate.toString() + " WHERE "+ MySQLiteHelper.COLUMN_TITLE +" = '" + f.getTitle() +
+                "' AND " + MySQLiteHelper.COLUMN_DIRECTOR +" = '" + f.getDirector()+"'";
+
+        database.execSQL(strSQL);
+    }
 }
