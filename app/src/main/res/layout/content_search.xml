@@ -7,11 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <SearchView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searcher"
-        android:actionViewClass="android.widget.SearchView"/>
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords|textUri|textPersonName|textFilter"
+            android:ems="10"
+            android:id="@+id/searcher"
+            android:layout_weight="1"
+            android:selectAllOnFocus="true"
+            android:maxLines="1"
+            tools:ignore="LabelFor"
+            android:text="@string/buscar_pel_cula" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_button"
+            android:layout_weight="7"
+            android:background="@drawable/ic_menu_search"
+            />
+    </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"

@@ -3,9 +3,13 @@ package com.example.sejo.navdra;
 import android.content.Intent;
 
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.os.Bundle;
@@ -15,50 +19,77 @@ import java.util.List;
  */
 
 public class SearcherActivity extends AppCompatActivity {
-    private SearchView searchView;
     private FilmData filmData;
     private List<Film> values;
     private ArrayAdapter<Film> adapter;
+
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_search);
-        searchView = (SearchView) findViewById(R.id.searcher);
         //searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        EditText editText = (EditText) findViewById(R.id.searcher);
 
         filmData = new FilmData(SearcherActivity.this);
         filmData.open();
-        ListView listView = (ListView) findViewById(R.id.list_films);
+
+        listView = (ListView) findViewById(R.id.list_films);
+
         values = filmData.getAllFilms();
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,values);
         listView.setAdapter(adapter);
-        //newOnQueryTextListener(new searchView.OnQueryTextListener());
-    }
 
+        editText.addTextChangedListener(new TextWatcher() {
 
-    private Object newOnQueryTextListener(final SearchView.OnQueryTextListener listener) {
-        return new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                String query = (String) searchView.getQuery();
-                values = filmData.FindFilms(query);
-                adapter.clear();
-                adapter.addAll(values);
-                return listener.onQueryTextSubmit(s);
+            public void afterTextChanged(Editable s) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                String query = (String) searchView.getQuery();
-                values = filmData.FindFilms(query);
-                adapter.clear();
-                adapter.addAll(values);
-                return listener.onQueryTextChange(s);
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                if(s.length() != 0){
+                    values = filmData.FindFilms(s.toString());
+                    adapter.clear();
+                    adapter.addAll(values);
+                }
             }
-        };
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(SearcherActivity.this, vistaPeli.class);
+                Film f = (Film) listView.getItemAtPosition(position);
+                intent.putExtra("title", f.getTitle());
+                intent.putExtra("dire", f.getDirector());
+                startActivity(intent);
+            }
+        });
+
     }
 
+    @Override
+    protected void onResume() {
+        filmData.open();
+        ArrayAdapter<Film> adapter = (ArrayAdapter<Film>) listView.getAdapter();
+        adapter.clear();
+        adapter.addAll(filmData.getAllFilms());
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        filmData.close();
+        super.onPause();
+    }
 
 }

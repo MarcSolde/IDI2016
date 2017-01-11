@@ -114,8 +114,8 @@ public class FilmData {
 
         Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
                 allColumns,
-                MySQLiteHelper.COLUMN_TITLE + " LIKE *" + s + "* OR "
-                        + MySQLiteHelper.COLUMN_PROTAGONIST + " LIKE *" + s + "*",
+                MySQLiteHelper.COLUMN_TITLE + " LIKE '%" + s + "%' OR "
+                        + MySQLiteHelper.COLUMN_PROTAGONIST + " LIKE '%" + s + "%'",
                 null,
                 null,
                 null,
