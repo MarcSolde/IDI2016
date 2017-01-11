@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -126,11 +126,13 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        } else if (id == R.id.nav_myfilms) {
+        } else if (id == R.id.nav_about) {
             //fragment = null;
             //fragmentTransaction = false;
+            intent = new Intent(this, About.class);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.Help) {
+            intent = new Intent(this, Help.class);
 
         } /*else if (id == R.id.nav_share) {
 
@@ -153,7 +155,7 @@ public class MainActivity extends AppCompatActivity
         ArrayAdapter<Film> adapter = (ArrayAdapter<Film>) listView.getAdapter();
         Film film;
         switch (view.getId()) {
-            case R.id.add:
+            /**case R.id.add:
                 String[] newFilm = new String[] { "Blade Runner", "Ridley Scott", "Rocky Horror Picture Show", "Jim Sharman", "The Godfather", "Francis Ford Coppola", "Toy Story", "John Lasseter" };
                 int nextInt = new Random().nextInt(4);
                 // save the new film to the database
@@ -171,17 +173,15 @@ public class MainActivity extends AppCompatActivity
                     adapter.clear();
                     adapter.addAll(filmData.getAllFilms());
                 }
-                break;
+                break;*/
             case R.id.ordenar:
-                System.out.println("botoOrd");
+                //System.out.println("botoOrd");
                 if(!ordenatPerNom) {
-                    System.out.println("ORDENAR NOM");
                     adapter.clear();
                     adapter.addAll(filmData.getAllFilms());
                     ordenatPerNom = true;
                 }
                 else {
-                    System.out.println("ORDENAR ANY");
                     adapter.clear();
                     adapter.addAll(filmData.gettAllFilmsYear());
                     ordenatPerNom = false;
