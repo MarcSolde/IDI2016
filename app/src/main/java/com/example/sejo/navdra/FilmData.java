@@ -101,6 +101,29 @@ public class FilmData {
         return comments;
     }
 
+    public List<Film> FindFilms(String s) {
+        List<Film> comments = new ArrayList<>();
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
+                allColumns,
+                MySQLiteHelper.COLUMN_TITLE+" LIKE *"+s+"* OR "
+                        +MySQLiteHelper.COLUMN_PROTAGONIST+" LIKE *"+s+"*",
+                null,
+                null,
+                null,
+                null
+        );
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Film comment = cursorToFilm(cursor);
+            comments.add(comment);
+            cursor.moveToNext();
+        }
+
+        return comments;
+    }
+
     private Film cursorToFilm(Cursor cursor) {
         Film film = new Film();
         film.setId(cursor.getLong(0));

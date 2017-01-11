@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity
         filmData = new FilmData(this);
         filmData.open();
         listView = (ListView) findViewById(R.id.lista);
-
         List<Film> values = filmData.getAllFilms();
 
 
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity
                 // save the new film to the database
                 //String titol, String pais, String any, String dir, String prot, String punts
                 film = filmData.createFilm(newFilm[nextInt*2], "test", "2014", newFilm[nextInt*2 + 1],"test", "10");
-                adapter.add(film);
+                //adapter.add(film);
                 adapter.clear();
                 adapter.addAll(filmData.getAllFilms());
                 break;

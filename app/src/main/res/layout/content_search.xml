@@ -10,11 +10,12 @@
     <SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searcher" />
+        android:id="@+id/searcher"
+        android:actionViewClass="android.widget.SearchView"/>
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listFilms" />
+        android:id="@+id/list_films" />
 
 </LinearLayout>
