@@ -108,6 +108,25 @@ public class FilmData {
         return comments;
     }
 
+    public List<Film> gettAllFilmsYear()
+    {
+        List<Film> comments = new ArrayList<>();
+
+        Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
+                allColumns, null, null, null, null, MySQLiteHelper.COLUMN_YEAR_RELEASE+" ASC");
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Film comment = cursorToFilm(cursor);
+            comments.add(comment);
+            cursor.moveToNext();
+        }
+        // make sure to close the cursor
+        cursor.close();
+
+        return comments;
+    }
+
     public Film getFilm(String peli, String dire)
     {
         //Asumimos que nunca puede haver 2 peliculas con elmismo nombre y director
