@@ -9,5 +9,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.sejo.navdra.Help">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Benvinguts a DataFilms!
+Aqui teniu la ajuda per l'ús de la nostra aplicació
+    - Per a buscar, accedir desde el NavigationDrawer
+    - Per a veure la fitxa d'una pel·licula, pitjar sobre el seu nom
+    - Desde la seva fitxa, es pot, o bé esborrar (mantenint pitjat el botó d'esborrat) o bé canviar la nota de la crítica, per mitjà del botó corresponent
+    - Per afegir una pel·licula, accedir desde el NavigationDrawer
+    - Per a veure l'about, accedir desde el NavigationDrawer
+    - Desde el llistat de pel·licules, les podem ordenar per títol o any, mitjançant el botó de 'Ordenar'
+    - Per a tornar enrere, feu servir el botó de enrere"/>
 
 </RelativeLayout>

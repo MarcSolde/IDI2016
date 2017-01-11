@@ -139,17 +139,24 @@ public class FilmData {
     {
         List<Film> comments = new ArrayList<>();
 
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
+        Cursor c = database.query(MySQLiteHelper.TABLE_FILMS,
                 allColumns, null, null, null, null, MySQLiteHelper.COLUMN_YEAR_RELEASE+" ASC");
 
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            Film comment = cursorToFilm(cursor);
-            comments.add(comment);
-            cursor.moveToNext();
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            Film f = new Film();
+            f.setId(c.getLong(0));
+            f.setTitle(c.getString(1));
+            f.setDirector(c.getString(2));
+            f.setCountry(c.getString(3));
+            f.setCritics_rate(c.getInt(6));
+            f.setProtagonist(c.getString(5));
+            f.setYear(c.getInt(4));
+            comments.add(f);
+            c.moveToNext();
         }
         // make sure to close the cursor
-        cursor.close();
+        c.close();
 
         return comments;
     }
