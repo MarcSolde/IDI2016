@@ -126,11 +126,12 @@ public class MainActivity extends AppCompatActivity
 
 
 
-        } else if (id == R.id.nav_myfilms) {
+        } else if (id == R.id.nav_about) {
             //fragment = null;
             //fragmentTransaction = false;
+            intent = new Intent(this, About.class);
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.Help) {
 
         } /*else if (id == R.id.nav_share) {
 

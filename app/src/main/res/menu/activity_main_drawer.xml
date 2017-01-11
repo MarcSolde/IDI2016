@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_myfilms"
+            android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="About" />
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_menu_search"
@@ -15,9 +15,9 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="Add Movie" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/Help"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Help" />
     </group>
 
 
