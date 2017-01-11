@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     private FilmData filmData;
     private ListView listView;
+    private boolean ordenatPerNom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        ordenatPerNom = true;
     }
 
     @Override
@@ -168,6 +171,21 @@ public class MainActivity extends AppCompatActivity
                     adapter.remove(film);
                     adapter.clear();
                     adapter.addAll(filmData.getAllFilms());
+                }
+                break;
+            case R.id.ordenar:
+                System.out.println("botoOrd");
+                if(!ordenatPerNom) {
+                    System.out.println("ORDENAR NOM");
+                    adapter.clear();
+                    adapter.addAll(filmData.getAllFilms());
+                    ordenatPerNom = true;
+                }
+                else {
+                    System.out.println("ORDENAR ANY");
+                    adapter.clear();
+                    adapter.addAll(filmData.gettAllFilmsYear());
+                    ordenatPerNom = false;
                 }
                 break;
 

@@ -31,6 +31,12 @@
             android:layout_height="wrap_content"
             android:text="Delete First"
             android:onClick="onClick"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ordenar"
+            android:text="Ordenar"
+            android:onClick="onClick"/>
 
     </LinearLayout>
 
