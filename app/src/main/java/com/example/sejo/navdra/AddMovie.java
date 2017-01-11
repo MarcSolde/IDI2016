@@ -40,6 +40,7 @@ public class AddMovie extends AppCompatActivity {
         FilmData fd = new FilmData(AddMovie.this);
         fd.open();
         Film f = fd.createFilm(titol, pais, any, director, prot, nota);
+        fd.close();
         Toast.makeText(AddMovie.this, "Pelicula Guardada", Toast.LENGTH_SHORT).show();
     }
 
