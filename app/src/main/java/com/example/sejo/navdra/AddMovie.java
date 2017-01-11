@@ -13,7 +13,6 @@ public class AddMovie extends AppCompatActivity {
     private Button ok;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("pene");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_movie);
         ok = (Button)findViewById(R.id.Boto);
