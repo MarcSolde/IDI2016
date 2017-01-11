@@ -18,9 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearcherActivity"></activity>
-        <activity android:name=".AddMovie"></activity>
-        <activity android:name=".vistaPeli"></activity>
+        <activity android:name=".SearcherActivity" />
+        <activity android:name=".AddMovie" />
+        <activity android:name=".vistaPeli" />
+        <activity android:name=".About" />
+        <activity android:name=".Help"></activity>
     </application>
 
 </manifest>

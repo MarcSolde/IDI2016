@@ -46,7 +46,7 @@ public class FilmData {
     public Film createFilm(String title, String pais, String bany, String director, String prot, String punts) {
         ContentValues values = new ContentValues();
         Log.d("Creating", "Creating " + title + " " + director);
-        System.out.println("AAAA");
+        //System.out.println("AAAA");
         // Add data: Note that this method only provides title and director
         // Must modify the method to add the full data
         values.put(MySQLiteHelper.COLUMN_TITLE, title);
@@ -73,7 +73,7 @@ public class FilmData {
                 null, null, null);
 
         cursor.moveToFirst();
-        Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(cursor));
+        //Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(cursor));
         Film newFilm = cursorToFilm(cursor);
 
         // Do not forget to close the cursor
@@ -139,17 +139,24 @@ public class FilmData {
     {
         List<Film> comments = new ArrayList<>();
 
-        Cursor cursor = database.query(MySQLiteHelper.TABLE_FILMS,
+        Cursor c = database.query(MySQLiteHelper.TABLE_FILMS,
                 allColumns, null, null, null, null, MySQLiteHelper.COLUMN_YEAR_RELEASE+" ASC");
 
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            Film comment = cursorToFilm(cursor);
-            comments.add(comment);
-            cursor.moveToNext();
+        c.moveToFirst();
+        while (!c.isAfterLast()) {
+            Film f = new Film();
+            f.setId(c.getLong(0));
+            f.setTitle(c.getString(1));
+            f.setDirector(c.getString(2));
+            f.setCountry(c.getString(3));
+            f.setCritics_rate(c.getInt(6));
+            f.setProtagonist(c.getString(5));
+            f.setYear(c.getInt(4));
+            comments.add(f);
+            c.moveToNext();
         }
         // make sure to close the cursor
-        cursor.close();
+        c.close();
 
         return comments;
     }
@@ -157,11 +164,11 @@ public class FilmData {
     public Film getFilm(String peli, String dire)
     {
         //Asumimos que nunca puede haver 2 peliculas con elmismo nombre y director
-        System.out.println("TEST");
+        //System.out.println("TEST");
         Cursor c = database.query(MySQLiteHelper.TABLE_FILMS,
                 allColumns,MySQLiteHelper.COLUMN_TITLE+" = '"+peli+"' AND "+MySQLiteHelper.COLUMN_DIRECTOR+" = '"+dire+"'", null, null, null, null);
         c.moveToFirst();
-        Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(c));
+        //Log.v("Cursor Object", DatabaseUtils.dumpCursorToString(c));
         Film f = new Film();
         f.setId(c.getLong(0));
         f.setTitle(c.getString(1));
@@ -170,8 +177,8 @@ public class FilmData {
         f.setCritics_rate(c.getInt(6));
         f.setProtagonist(c.getString(5));
         f.setYear(c.getInt(4));
-        System.out.println(f.getTitle());
-        System.out.println(f.getCountry());
+        //System.out.println(f.getTitle());
+        //System.out.println(f.getCountry());
         c.close();
         return f;
     }
