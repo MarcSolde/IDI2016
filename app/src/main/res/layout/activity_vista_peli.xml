@@ -25,10 +25,10 @@
             android:id="@+id/tEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="50dp"
+            android:layout_alignParentRight="true"
             android:hint="Títol"
-            android:textSize="30dp"
+            android:inputType="none"
+            android:textSize="25dp"
             />
     </RelativeLayout>
     <RelativeLayout
@@ -46,10 +46,10 @@
             android:id="@+id/Pais"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="50dp"
+            android:layout_alignParentRight="true"
             android:hint="Pais"
-            android:textSize="30dp"
+            android:inputType="none"
+            android:textSize="25dp"
             android:paddingTop="20dp"/>
     </RelativeLayout>
     <RelativeLayout
@@ -67,10 +67,10 @@
             android:id="@+id/Any"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="50dp"
+            android:layout_alignParentRight="true"
             android:hint="Any"
-            android:textSize="30dp"
+            android:inputType="none"
+            android:textSize="25dp"
             android:paddingTop="20dp"/>
     </RelativeLayout>
     <RelativeLayout
@@ -88,10 +88,10 @@
             android:id="@+id/Director"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="50dp"
+            android:layout_alignParentRight="true"
             android:hint="Director"
-            android:textSize="30dp"
+            android:inputType="none"
+            android:textSize="25dp"
             android:paddingTop="20dp"/>
     </RelativeLayout>
     <RelativeLayout
@@ -109,10 +109,10 @@
             android:id="@+id/Protagonista"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="50dp"
+            android:layout_alignParentRight="true"
             android:hint="Protagonista"
-            android:textSize="30dp"
+            android:inputType="none"
+            android:textSize="25dp"
             android:paddingTop="20dp"/>
     </RelativeLayout>
     <RelativeLayout
@@ -130,12 +130,17 @@
             android:id="@+id/Nota"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginRight="50dp"
+            android:layout_alignParentRight="true"
             android:hint="Nota"
-            android:textSize="30dp"
+            android:textSize="25dp"
+            android:inputType="none"
             android:paddingTop="20dp"/>
     </RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Esborrar"
+        android:id="@+id/Boto"/>
 
 
 

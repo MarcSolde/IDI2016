@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 Intent intent = new Intent(MainActivity.this, vistaPeli.class);
+                Film f = (Film) listView.getItemAtPosition(position);
+                intent.putExtra("title", f.getTitle());
+                intent.putExtra("dire", f.getDirector());
                 startActivity(intent);
             }
         });
@@ -153,7 +156,7 @@ public class MainActivity extends AppCompatActivity
                 int nextInt = new Random().nextInt(4);
                 // save the new film to the database
                 //String titol, String pais, String any, String dir, String prot, String punts
-                film = filmData.createFilm(newFilm[nextInt*2], "test", "2014", newFilm[nextInt*2 + 1],"test", "10");
+                film = filmData.createFilm(newFilm[nextInt*2], "testPais", "2014", newFilm[nextInt*2 + 1],"testProt", "10");
                 adapter.add(film);
                 adapter.clear();
                 adapter.addAll(filmData.getAllFilms());
